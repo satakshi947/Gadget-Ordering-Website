@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+
+        body {
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        width: 400px;
+        height: 500px;
+        background-image: url(../images/backg.jpg);
+    }
+
+    h1 {
+        text-align: center;
+        color: white;
+    }
+
+    .input-group {
+        margin-bottom: 15px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #fbf8f8;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+    input:focus {
+        border-color: #007BFF;
+        outline: none;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+    .input-group{
+        margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    button{
+        margin-top: 20px;
+    }
+    .container #name {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .container #email {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    .container #password {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form id="myform" action="index.html">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" onkeyup="validateName()" required>
+            <div class="message" id="nameMessage"></div>
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" onkeyup="validateEmail()" required>
+            <div class="message" id="emailMessage"></div>
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" onkeyup="validatePassword()" required>
+            <div class="password" id="passwordMessage"></div>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+    <script src="login.js"></script>
+</body>
+</html>

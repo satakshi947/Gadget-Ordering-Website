@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Menu - Gadget Store Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: orange;
+        }
+
+        /* Navigation Bar */
+        header {
+            background-color: orangered;
+            color: #fff;
+            padding: 1em 0;
+            text-align: center;
+        }
+
+        header h1 {
+            margin-bottom: 0.5em;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 1.5em;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+
+        nav ul li a:hover {
+            color: black;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            padding: 2em;
+            text-align: center;
+        }
+
+        .menu-section h2 {
+            font-size: 2em;
+            margin-bottom: 1em;
+            color: #333;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5em;
+            padding: 2em 0;
+        }
+
+        .menu-item {
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .item-details {
+            padding: 1em;
+            text-align: left;
+        }
+
+        .item-details h3 {
+            font-size: 1.2em;
+            color: orange;
+        }
+
+        .item-details p {
+            margin: 0.5em 0;
+        }
+
+        .item-details .price {
+            font-weight: bold;
+            color: #ff9800;
+        }
+
+        button {
+            background-color: #ff9800;
+            color: #fff;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #e68a00;
+        }
+
+        /* Payment Section */
+        .payment {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ff6347;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .payment label {
+            display: block;
+            margin-top: 1rem;
+            color: #333;
+        }
+
+        .payment input {
+            padding: 0.5rem;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .payment button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+
+        .payment button:hover {
+            background-color: #e55341;
+        }
+
+        /* Order Success Section */
+        .order-success {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #ff6347;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .order-success h2 {
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .order-success p {
+            color: #333;
+            font-size: 1.1rem;
+        }
+
+        .order-success button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            color: white;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+        }
+
+        .order-success button:hover {
+            background-color: #e55341;
+        }
+        #image{
+            height: 300px;
+            width: 300px;
+        }
+    </style>
+    <script>
+        // Array to hold items added to the cart
+        let cartItems = [];
+
+        // Function to add items to the cart
+        function addToCart(itemName) {
+            cartItems.push(itemName);
+            alert(itemName + " has been added to your cart!");
+            displayCartItems();
+        }
+
+        // Function to display cart items
+        function displayCartItems() {
+            const cartList = document.getElementById('cart-items');
+            if (cartList) {
+                cartList.innerHTML = ""; // Clear the existing items
+                cartItems.forEach((item, index) => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = item;
+                    cartList.appendChild(listItem);
+                });
+            }
+        }
+
+        // Function to proceed to payment
+        function goToPayment() {
+            if (cartItems.length === 0) {
+                alert('Your cart is empty! Please add items to the cart before proceeding to payment.');
+                return;
+            }
+            document.getElementById('cart').style.display = 'none';
+            document.getElementById('payment').style.display = 'block';
+        }
+
+        // Function to reset the order
+        function resetOrder() {
+            cartItems = [];
+            document.getElementById('cart-items').innerHTML = '';
+            document.getElementById('payment').style.display = 'none';
+            document.getElementById('cart').style.display = 'block';
+        }
+
+        // Function to place the order
+        function placeOrder() {
+            alert("Order placed successfully!");
+            resetOrder();
+        }
+        const cart = [];
+
+function addToCart(name, price, image) {
+    cart.push({ name, price, image });
+    localStorage.setItem('cart', JSON.stringify(cart)); // Store cart in localStorage
+    alert(`${name} has been added to your cart!`);
+}
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', (event) => {
+        const name = event.target.getAttribute('data-name');
+        const price = parseInt(event.target.getAttribute('data-price'));
+        const image = event.target.getAttribute('data-image');
+        addToCart(name, price, image);
+    });
+});
+
+// Load cart from localStorage on page load
+window.onload = () => {
+    const storedCart = localStorage.getItem('cart');
+    if (storedCart) {
+        cart.push(...JSON.parse(storedCart));
+    }
+};
+    </script>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <header>
+        <nav>
+            <h1>Gadget Store Hub</h1>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="payment.html">Payment</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Explore Menu Section -->
+    <section class="menu-section">
+        <h2>Explore Our Gadgets</h2>
+        <div class="menu-grid">
+
+            <!-- Menu Items (15 items total) -->
+            <div class="menu-item">
+                <img id="image" src="../images/Stoßfeste, durchsichtige Hülle für Samsung S22_S21_S20_S10_Note-Serie Hinweis 20 Ultra-Rot.jpg" alt="Smartphone">
+                <div class="item-details">
+                    <h3>Smartphone</h3>
+                    <p>Latest model with high-end features.</p>
+                    <p class="price">₹60,000</p>
+                    <button onclick="addToCart('Smartphone')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img id="image"  src="../images/laptop.jpg" alt="Laptop">
+                <div class="item-details">
+                    <h3>Laptop</h3>
+                    <p>Powerful performance for work and play.</p>
+                    <p class="price">₹80,000</p>
+                    <button onclick="addToCart('Laptop')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img id="image" src="../images/5fa510cd-bc28-48ca-aff5-99e62029434a.jpg" alt="Tablet">
+                <div class="item-details">
+                    <h3>Tablet</h3>
+                    <p>Portable and versatile device.</p>
+                    <p class="price">₹35,000</p>
+                    <button onclick="addToCart('Tablet')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img id="image"  src="../images/Apple smartwatch  Smartwatch, technology.jpg" alt="Smartwatch">
+                <div class="item-details">
+                    <h3>Smartwatch</h3>
+                    <p>Track your health and notifications.</p>
+                    <p class="price">₹15,000</p>
+                    <button onclick="addToCart('Smartwatch')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img src="..//images/These Bluetooth Headphones Are the Best Pair I've Ever Had, and They're Only $50.jpg" alt="Wireless Headphones">
+                <div class="item-details">
+                    <h3>Wireless Headphones</h3>
+                    <p>Experience true wireless freedom.</p>
+                    <p class="price">₹8,000</p>
+                    <button onclick="addToCart('Wireless Headphones')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="..//images/Playstation Lover (6).jpg" alt="Gaming Console">
+                <div class="item-details">
+                    <h3>Gaming Console</h3>
+                    <p>Immersive gaming experience.</p>
+                    <p class="price">₹50,000</p>
+                    <button onclick="addToCart('Gaming Console')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="../images/Photo by Inmortal Producciones on Pexels.jpg" alt="Drone">
+                <div class="item-details">
+                    <h3>Drone</h3>
+                    <p>Capture stunning aerial views.</p>
+                    <p class="price">₹40,000</p>
+                    <button onclick="addToCart('Drone')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img  src="..//images/Modern Minimal Living Room Media Setup.jpg" alt="Smart TV">
+                <div class="item-details">
+                    <h3>Smart TV</h3>
+                    <p>Watch your favorite shows in high definition.</p>
+                    <p class="price">₹70,000</p>
+                    <button onclick="addToCart('Smart TV')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img  src="..//images/speaker.jpg" alt="Portable Speaker">
+                <div class="item-details">
+                    <h3>Portable Speaker</h3>
+                    <p>Enjoy music on the go.</p>
+                    <p class="price">₹10,000</p>
+                    <button onclick="addToCart('Portable Speaker')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="..//images/Fitness tracker smart watch __smart watch wallpaper aesthetic __ smart watches for men __.jpg" alt="Fitness Tracker">
+                <div class="item-details">
+                    <h3>Fitness Tracker</h3>
+                    <p>Monitor your fitness activities.</p>
+                    <p class="price">₹3,000</p>
+                    <button onclick="addToCart('Fitness Tracker')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="..//images/Canon EOS R Series on Instagram_ “EOS R + Rf….jpg" alt="Webcam">
+                <div class="item-details">
+                    <h3>Webcam</h3>
+                    <p>High-definition video calling.</p>
+                    <p class="price">₹25,000</p>
+                    <button onclick="addToCart('Webcam')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="..//images/img2.jpg" alt="External Hard Drive">
+                <div class="item-details">
+                    <h3>External Hard Drive</h3>
+                    <p>Expand your storage space easily.</p>
+                    <p class="price">₹4,000</p>
+                    <button onclick="addToCart('External Hard Drive')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img   src="..//images/router.jpg" alt="WiFi Router">
+                <div class="item-details">
+                    <h3>WiFi Router</h3>
+                    <p>Stay connected with high-speed internet.</p>
+                    <p class="price">₹3,500</p>
+                    <button onclick="addToCart('WiFi Router')">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <img  src="..//images/power bank.jpg" alt="Power Bank">
+                <div class="item-details">
+                    <h3>Power Bank</h3>
+                    <p>Charge your devices on the go.</p>
+                    <p class="price">₹1,500</p>
+                    <button onclick="addToCart('Power Bank')">Add to Cart</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Cart Section -->
+    <section id="cart" style="padding: 2em; text-align: center;">
+        <h2>Your Cart</h2>
+        <ul id="cart-items">
+            <!-- Cart items will be displayed here -->
+        </ul>
+        <button onclick="goToPayment()">Proceed to Payment</button>
+    </section>
+
+    <!-- Payment Section -->
+    <section id="payment" class="payment" style="display: none;">
+        <h2>Payment Information</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <label for="address">Shipping Address:</label>
+        <input type="text" id="address" required>
+        <button onclick="placeOrder()">Place Order</button>
+        <button onclick="resetOrder()">Cancel</button>
+    </section>
+
+    <!-- Order Success Section -->
+    <section id="order-success" class="order-success" style="display: none;">
+        <h2>Order Placed Successfully!</h2>
+        <p>Thank you for your order! Your gadgets will be shipped soon.</p>
+        <button onclick="resetOrder()">Continue Shopping</button>
+    </section>
+
+</body>
+</html>

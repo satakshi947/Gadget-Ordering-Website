@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Online Gadget Store</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #li{
+            color: white;
+            text-align: center;
+            margin-left: 150px;
+        }
+        header h1{
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <script>
+        function showAlert(event) {
+            event.preventDefault(); // Prevent the default form submission
+            alert("Your information has been passed to us and we will contact you soon.");
+            document.querySelector('form').reset(); // Optional: Reset the form after submission
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Contact Us</h1>
+        <nav>
+            <ul>
+                <li><a id="li" href="index.html">Home</a></li>
+                <li><a id="li" href="cart.html">Cart</a></li>
+                <li><a id="li" href="rate.html">Rating</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="contact">
+            <h2>Get in Touch</h2>
+            <form onsubmit="showAlert(event)"> <!-- Added the onsubmit attribute -->
+                <label for="name">Name:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="message">Message:</label>
+                <textarea id="message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2024 Online Gadget Store</p>
+    </footer>
+</body>
+</html>

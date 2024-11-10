@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate a Product</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.rating-section {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+strong {
+    color: #333;
+}
+    </style> <!-- External CSS file -->
+</head>
+<body>
+    <div class="rating-section">
+        <h2>Rate a Product</h2>
+        <form id="ratingForm">
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating:</label>
+                <select id="rating" name="rating" required>
+                    <option value="">Select Rating</option>
+                    <option value="1">1 Star</option>
+                    <option value="2">2 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="5">5 Stars</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="review">Review:</label>
+                <textarea id="review" name="review" rows="4" required></textarea>
+            </div>
+            <button type="submit">Submit Rating</button>
+        </form>
+
+        <h3>Submitted Ratings</h3>
+        <ul id="ratingsList"></ul>
+    </div>
+
+    <script>
+        const form = document.getElementById('ratingForm');
+        const ratingsList = document.getElementById('ratingsList');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const productName = document.getElementById('productName').value;
+            const rating = document.getElementById('rating').value;
+            const review = document.getElementById('review').value;
+
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<strong>${productName}</strong>: ${rating} Stars - ${review}`;
+            ratingsList.appendChild(listItem);
+
+            // Clear the input fields
+            form.reset();
+        });
+    </script>
+</body>
+</html>

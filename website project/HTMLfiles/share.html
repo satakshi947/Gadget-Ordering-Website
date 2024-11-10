@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shared Products</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.shared-products-section {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: auto;
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+    text-align: center;
+}
+
+a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+    </style> <!-- External CSS file -->
+</head>
+<body>
+    <div class="shared-products-section">
+        <h2>Share a Product</h2>
+        <form id="sharedProductForm">
+            <div class="form-group">
+                <label for="productName">Product Name:</label>
+                <input type="text" id="productName" name="productName" required>
+            </div>
+            <div class="form-group">
+                <label for="productLink">Product Link:</label>
+                <input type="url" id="productLink" name="productLink" required>
+            </div>
+            <button type="submit">Share Product</button>
+        </form>
+
+        <h3>Shared Products</h3>
+        <ul id="sharedProductsList"></ul>
+    </div>
+
+    <script>
+        const form = document.getElementById('sharedProductForm');
+        const sharedProductsList = document.getElementById('sharedProductsList');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const productName = document.getElementById('productName').value;
+            const productLink = document.getElementById('productLink').value;
+
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `<a href="${productLink}" target="_blank">${productName}</a>`;
+            sharedProductsList.appendChild(listItem);
+
+            // Clear the input fields
+            form.reset();
+        });
+    </script>
+</body>
+</html>
